@@ -13,3 +13,9 @@ toppings.forEach(function(row) {
   li.innerHTML = row;
   content.appendChild(li);
 });
+
+submitButton = document.getElementById('submit');
+
+submitButton.onclick = function() {
+  console.log('submit clicked');
+};
