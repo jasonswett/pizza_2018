@@ -74,7 +74,7 @@ function addTopping(toppingName, price) {
 
   refreshToppingList();
   $('topping-name').value = '';
-  $('price').value = '';
+  $('topping-price').value = '';
 }
 
 function setErrorMessage(errorMessage) {
@@ -82,18 +82,18 @@ function setErrorMessage(errorMessage) {
 }
 
 $('submit').onclick = function() {
-  addTopping($('topping-name').value, $('price').value);
+  addTopping($('topping-name').value, $('topping-price').value);
 };
 
 var submitOnKeydown = function(e) {
   setErrorMessage('');
 
   if (e.key === 'Enter') {
-    addTopping($('topping-name').value, $('price').value);
+    addTopping($('topping-name').value, $('topping-price').value);
   }
 };
 
 $('topping-name').onkeydown = submitOnKeydown;
-$('price').onkeydown = submitOnKeydown;
+$('topping-price').onkeydown = submitOnKeydown;
 
 refreshToppingList();
