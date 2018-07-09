@@ -23,6 +23,10 @@ var toppings = [
 
 var $ = (id) => document.getElementById(id);
 
+var pizzaForm = {
+  toppings: []
+};
+
 function formattedPrice(price) {
   return `$${(price / 100).toFixed(2)}`;
 }
@@ -33,12 +37,37 @@ function addToppingRow($content, topping) {
   $content.appendChild($li);
 }
 
+function addPizzaToppingOptionRow($content, topping) {
+  let $li = document.createElement('li');
+
+  $li.innerHTML = `
+    <button class="add-topping-button" data-name="${topping.name}" data-price="${topping.price}">
+      ${topping.name} (${formattedPrice(topping.price)})
+    </button>
+  `;
+
+  $content.appendChild($li);
+}
+
 function refreshToppingList() {
-  let $content = document.getElementById('content');
+  let $content = $('content');
+  let $pizzaToppingOptions = $('pizza-topping-options');
   $content.innerHTML = '';
+  $pizzaToppingOptions.innerHTML = '';
 
   toppings.forEach(function(topping) {
     addToppingRow($content, topping)
+    addPizzaToppingOptionRow($pizzaToppingOptions, topping)
+  });
+
+  let buttons = document.getElementsByClassName('add-topping-button');
+  Array.prototype.forEach.call(buttons, function($button) {
+    $button.onclick = function() {
+      pizzaForm.toppings.push({
+        name: $button.dataset.name,
+        price: $button.dataset.price
+      });
+    };
   });
 }
 
