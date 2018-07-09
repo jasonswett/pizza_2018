@@ -6,7 +6,7 @@ var toppings = [
   'Green Pepper'
 ];
 
-content = document.getElementById('content');
+var content = document.getElementById('content');
 
 toppings.forEach(function(row) {
   let li = document.createElement('li');
@@ -14,7 +14,7 @@ toppings.forEach(function(row) {
   content.appendChild(li);
 });
 
-submitButton = document.getElementById('submit');
+var submitButton = document.getElementById('submit');
 
 submitButton.onclick = function() {
   console.log('submit clicked');
