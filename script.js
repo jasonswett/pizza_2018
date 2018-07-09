@@ -54,24 +54,25 @@ function toppingNameIsDuplicate(newToppingName) {
   return result;
 }
 
-function addTopping(toppingName, price) {
-  toppingName = toppingName.trim();
+function addTopping(name, price) {
+  name = name.trim();
 
-  if (toppingName === '') {
+  if (name === '') {
     setErrorMessage("Topping name can't be blank");
     return;
   }
 
-  if (toppingNameIsDuplicate(toppingName)) {
+  if (price === '') {
+    setErrorMessage("Topping price can't be blank");
+    return;
+  }
+
+  if (toppingNameIsDuplicate(name)) {
     setErrorMessage('Topping already exists');
     return;
   }
 
-  toppings.push({
-    name: toppingName,
-    price: price
-  });
-
+  toppings.push({ name: name, price: price });
   refreshToppingList();
   $('topping-name').value = '';
   $('topping-price').value = '';
