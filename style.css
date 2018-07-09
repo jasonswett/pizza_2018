@@ -1,0 +1,25 @@
+body {
+  background-image: url('guy.jpg');
+  color: #FFFF00;
+}
+
+body, button, input {
+  font-family: 'Courier New';
+  font-size: 16px;
+}
+
+h2 {
+  padding: 0;
+  margin: 0;
+}
+
+#toppings, #add-pizza, #pizzas {
+  width: 500px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #8B4513;
+}
+
+#add-pizza, #pizzas {
+  float: left;
+}

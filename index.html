@@ -2,37 +2,40 @@
 <html>
 <head>
   <title>Pizza Toppings</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <h2>Toppings</h2>
+  <div id="toppings">
+    <h2>Toppings</h2>
 
-  <ul id="topping-list"></ul>
-  <div id="error"></div>
+    <ul id="topping-list"></ul>
+    <div id="error"></div>
 
-  <div>
-    <label for="topping-name">Name</label><br>
-    <input id="topping-name">
+    <div>
+      <label for="topping-name">Name</label><br>
+      <input id="topping-name">
+    </div>
+
+    <div>
+      <label for="topping-price">Price</label><br>
+      <input id="topping-price">
+    </div>
+
+    <button id="submit">Save Topping</button>
   </div>
 
-  <div>
-    <label for="topping-price">Price</label><br>
-    <input id="topping-price">
+  <div id="add-pizza">
+    <h2>Add Pizza</h2>
+
+    <ul id="pizza-topping-options"></ul>
+    <div id="pizza-summary"></div>
+    <button id="save-pizza">Save Pizza</button>
   </div>
 
-  <button id="submit">Save Topping</button>
-
-  <hr>
-
-  <h2>New Pizza</h2>
-
-  <ul id="pizza-topping-options"></ul>
-  <div id="pizza-summary"></div>
-  <button id="save-pizza">Save Pizza</button>
-
-  <hr>
-
-  <h2>Pizzas</h2>
-  <div id="pizza-list"></div>
+  <div id="pizzas">
+    <h2>Pizzas</h2>
+    <div id="pizza-list"></div>
+  </div>
 
   <script src="./script.js"></script>
 </body>
