@@ -31,10 +31,10 @@ function formattedPrice(price) {
   return `$${(price / 100).toFixed(2)}`;
 }
 
-function addToppingRow($content, topping) {
+function addToppingRow($toppingList, topping) {
   let $li = document.createElement('li');
   $li.innerHTML = `${topping.name} (${formattedPrice(topping.price)})`;
-  $content.appendChild($li);
+  $toppingList.appendChild($li);
 }
 
 function pizzaCost(toppings) {
@@ -47,7 +47,7 @@ function pizzaCost(toppings) {
   return total;
 }
 
-function addPizzaToppingOptionRow($content, topping) {
+function addPizzaToppingOptionRow($pizzaToppingOptions, topping) {
   let $li = document.createElement('li');
 
   let $button = document.createElement('button');
@@ -71,17 +71,17 @@ function addPizzaToppingOptionRow($content, topping) {
   }
 
   $li.appendChild($button);
-  $content.appendChild($li);
+  $pizzaToppingOptions.appendChild($li);
 }
 
 function refreshToppingList() {
-  let $content = $('content');
+  let $toppingList = $('topping-list');
   let $pizzaToppingOptions = $('pizza-topping-options');
-  $content.innerHTML = '';
+  $toppingList.innerHTML = '';
   $pizzaToppingOptions.innerHTML = '';
 
   toppings.forEach(function(topping) {
-    addToppingRow($content, topping)
+    addToppingRow($toppingList, topping)
     addPizzaToppingOptionRow($pizzaToppingOptions, topping)
   });
 }
