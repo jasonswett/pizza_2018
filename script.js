@@ -37,6 +37,16 @@ function addToppingRow($content, topping) {
   $content.appendChild($li);
 }
 
+function pizzaCost(toppings) {
+  let total = 1500;
+
+  toppings.forEach(function(topping) {
+    total += topping.price;
+  });
+
+  return total;
+}
+
 function addPizzaToppingOptionRow($content, topping) {
   let $li = document.createElement('li');
 
@@ -48,6 +58,16 @@ function addPizzaToppingOptionRow($content, topping) {
       name: topping.name,
       price: topping.price
     });
+
+    $('pizza-summary').innerHTML = '';
+
+    let $div = document.createElement('div');
+    $div.innerHTML = pizzaForm.toppings.map(topping => topping.name).join(', ');
+    $('pizza-summary').appendChild($div);
+
+    $totalDiv = document.createElement('div');
+    $totalDiv.innerHTML = `Total: ${formattedPrice(pizzaCost(pizzaForm.toppings))}`;
+    $('pizza-summary').appendChild($totalDiv);
   }
 
   $li.appendChild($button);
