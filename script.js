@@ -6,16 +6,16 @@ var toppings = [
   'Green Pepper'
 ];
 
-var content = document.getElementById('content');
+var $content = document.getElementById('content');
 
 toppings.forEach(function(row) {
-  let li = document.createElement('li');
-  li.innerHTML = row;
-  content.appendChild(li);
+  let $li = document.createElement('li');
+  $li.innerHTML = row;
+  $content.appendChild($li);
 });
 
-var submitButton = document.getElementById('submit');
+var $submitButton = document.getElementById('submit');
 
-submitButton.onclick = function() {
+$submitButton.onclick = function() {
   console.log('submit clicked');
 };
