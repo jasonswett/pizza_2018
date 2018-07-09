@@ -54,31 +54,38 @@ function toppingNameIsDuplicate(newToppingName) {
   return result;
 }
 
-function addTopping(name, price) {
-  name = name.trim();
-  price = price * 100;
+function getToppingErrorMessages(name, price) {
+  let errorMessages = [];
 
   if (name === '') {
-    setErrorMessage("Topping name can't be blank");
-    return;
+    errorMessages.push("Topping name can't be blank");
   }
 
   if (price === '') {
-    setErrorMessage("Topping price can't be blank");
-    return;
+    errorMessages.push("Topping price can't be blank");
   }
 
   if (toppingNameIsDuplicate(name)) {
-    setErrorMessage('Topping already exists');
+    errorMessages.push('Topping already exists');
+  }
+
+  if (!Number.isInteger(price * 100)) {
+    errorMessages.push('Topping price must be a valid dollar amount');
+  }
+
+  return errorMessages;
+}
+
+function addTopping(name, price) {
+  name = name.trim();
+
+  let errorMessages = getToppingErrorMessages(name, price);
+  if (errorMessages.length > 0) {
+    setErrorMessage(errorMessages.join(', '));
     return;
   }
 
-  if (!Number.isInteger(price)) {
-    setErrorMessage('Topping price must be a number');
-    return;
-  }
-
-  toppings.push({ name: name, price: price });
+  toppings.push({ name: name, price: price * 100 });
   refreshToppingList();
   $('topping-name').value = '';
   $('topping-price').value = '';
