@@ -1,17 +1,17 @@
 var toppings = [
-  'Pepperoni',
-  'Ham',
-  'Sausage',
-  'Onion',
-  'Green Pepper'
+  { name: 'Pepperoni' },
+  { name: 'Ham' },
+  { name: 'Sausage' },
+  { name: 'Onion' },
+  { name: 'Green Pepper' }
 ];
 
 var $submitButton = document.getElementById('submit');
 var $toppingName = document.getElementById('topping-name');
 
-function addToppingRow($content, toppingName) {
+function addToppingRow($content, topping) {
   let $li = document.createElement('li');
-  $li.innerHTML = toppingName;
+  $li.innerHTML = topping.name;
   $content.appendChild($li);
 }
 
@@ -19,16 +19,16 @@ function refreshToppingList() {
   let $content = document.getElementById('content');
   $content.innerHTML = '';
 
-  toppings.forEach(function(toppingName) {
-    addToppingRow($content, toppingName)
+  toppings.forEach(function(topping) {
+    addToppingRow($content, topping)
   });
 }
 
 function toppingNameIsDuplicate(newToppingName) {
   let result = false;
 
-  toppings.forEach(function(toppingName) {
-    if (toppingName === newToppingName) {
+  toppings.forEach(function(topping) {
+    if (topping.name === newToppingName) {
       result = true;
     }
   });
@@ -49,7 +49,7 @@ function addTopping(toppingName) {
     return;
   }
 
-  toppings.push(toppingName);
+  toppings.push({ name: toppingName });
   refreshToppingList();
   $toppingName.value = '';
 }
