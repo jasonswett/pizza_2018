@@ -17,7 +17,7 @@ function refreshToppingList() {
   });
 }
 
-submitButton = document.getElementById('submit');
+var submitButton = document.getElementById('submit');
 
 submitButton.onclick = function() {
   let toppingName = document.getElementById('topping-name');
