@@ -79,7 +79,7 @@ function refreshPizzaList() {
 
   pizzas.forEach(function(pizza) {
     let $div = document.createElement('div');
-    $div.innerHTML = `${inlineToppingList(pizza.toppings)} (${formattedPrice(pizzaCost(toppings))})`;
+    $div.innerHTML = `${inlineToppingList(pizza.toppings)} (${formattedPrice(pizzaCost(pizza.toppings))})`;
     $('pizza-list').appendChild($div);
   });
 }
