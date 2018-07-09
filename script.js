@@ -37,6 +37,8 @@ function toppingNameIsDuplicate(newToppingName) {
 }
 
 function addTopping(toppingName) {
+  toppingName = toppingName.trim();
+
   if (toppingName === '') {
     setErrorMessage("Topping name can't be blank");
     return;
