@@ -56,6 +56,7 @@ function toppingNameIsDuplicate(newToppingName) {
 
 function addTopping(name, price) {
   name = name.trim();
+  price = price * 100;
 
   if (name === '') {
     setErrorMessage("Topping name can't be blank");
@@ -69,6 +70,11 @@ function addTopping(name, price) {
 
   if (toppingNameIsDuplicate(name)) {
     setErrorMessage('Topping already exists');
+    return;
+  }
+
+  if (!Number.isInteger(price)) {
+    setErrorMessage('Topping price must be a number');
     return;
   }
 
