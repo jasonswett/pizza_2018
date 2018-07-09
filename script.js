@@ -21,9 +21,7 @@ var toppings = [
   }
 ];
 
-var $submitButton = document.getElementById('submit');
-var $toppingName = document.getElementById('topping-name');
-var $price = document.getElementById('price');
+var $ = (id) => document.getElementById(id);
 
 function formattedPrice(price) {
   return `$${(price / 100).toFixed(2)}`;
@@ -75,26 +73,27 @@ function addTopping(toppingName, price) {
   });
 
   refreshToppingList();
-  $toppingName.value = '';
-  $price.value = '';
+  $('topping-name').value = '';
+  $('price').value = '';
 }
 
 function setErrorMessage(errorMessage) {
   document.getElementById('error').innerHTML = errorMessage;
 }
 
-$submitButton.onclick = function() {
-  addTopping($toppingName.value, $price.value);
+$('submit').onclick = function() {
+  addTopping($('topping-name').value, $('price').value);
 };
 
-$toppingName.onkeydown = function(e) {
+var submitOnKeydown = function(e) {
   setErrorMessage('');
 
   if (e.key === 'Enter') {
-    addTopping($toppingName.value, $price.value);
+    addTopping($('topping-name').value, $('price').value);
   }
 };
 
-$price.onkeydown = $toppingName.onkeydown;
+$('topping-name').onkeydown = submitOnKeydown;
+$('price').onkeydown = submitOnKeydown;
 
 refreshToppingList();
