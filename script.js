@@ -40,12 +40,17 @@ function addToppingRow($content, topping) {
 function addPizzaToppingOptionRow($content, topping) {
   let $li = document.createElement('li');
 
-  $li.innerHTML = `
-    <button class="add-topping-button" data-name="${topping.name}" data-price="${topping.price}">
-      ${topping.name} (${formattedPrice(topping.price)})
-    </button>
-  `;
+  let $button = document.createElement('button');
+  $button.innerHTML = topping.name;
 
+  $button.onclick = function() {
+    pizzaForm.toppings.push({
+      name: topping.name,
+      price: topping.price
+    });
+  }
+
+  $li.appendChild($button);
   $content.appendChild($li);
 }
 
@@ -58,16 +63,6 @@ function refreshToppingList() {
   toppings.forEach(function(topping) {
     addToppingRow($content, topping)
     addPizzaToppingOptionRow($pizzaToppingOptions, topping)
-  });
-
-  let buttons = document.getElementsByClassName('add-topping-button');
-  Array.prototype.forEach.call(buttons, function($button) {
-    $button.onclick = function() {
-      pizzaForm.toppings.push({
-        name: $button.dataset.name,
-        price: $button.dataset.price
-      });
-    };
   });
 }
 
