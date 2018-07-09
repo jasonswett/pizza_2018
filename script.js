@@ -55,23 +55,32 @@ function toppingNameIsDuplicate(newToppingName) {
 }
 
 function getToppingErrorMessages(name, price) {
+  let validators = [
+    {
+      passes: (name, price) => name !== '',
+      errorMessage: "Topping name can't be blank"
+    },
+    {
+      passes: (name, price) => price !== '',
+      errorMessage: "Topping price can't be blank"
+    },
+    {
+      passes: (name, price) => !toppingNameIsDuplicate(name),
+      errorMessage: 'Topping already exists'
+    },
+    {
+      passes: (name, price) => Number.isInteger(price * 100),
+      errorMessage: 'Topping price must be a valid dollar amount'
+    },
+  ];
+
   let errorMessages = [];
 
-  if (name === '') {
-    errorMessages.push("Topping name can't be blank");
-  }
-
-  if (price === '') {
-    errorMessages.push("Topping price can't be blank");
-  }
-
-  if (toppingNameIsDuplicate(name)) {
-    errorMessages.push('Topping already exists');
-  }
-
-  if (!Number.isInteger(price * 100)) {
-    errorMessages.push('Topping price must be a valid dollar amount');
-  }
+  validators.forEach(function(validator) {
+    if (!validator.passes(name, price)) {
+      errorMessages.push(validator.errorMessage);
+    }
+  });
 
   return errorMessages;
 }
