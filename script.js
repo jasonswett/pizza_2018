@@ -24,9 +24,26 @@ function refreshToppingList() {
   });
 }
 
+function toppingNameIsDuplicate(newToppingName) {
+  let result = false;
+
+  toppings.forEach(function(toppingName) {
+    if (toppingName === newToppingName) {
+      result = true;
+    }
+  });
+
+  return result;
+}
+
 function addTopping(toppingName) {
   if (toppingName === '') {
     setErrorMessage("Topping name can't be blank");
+    return;
+  }
+
+  if (toppingNameIsDuplicate(toppingName)) {
+    setErrorMessage('Topping already exists');
     return;
   }
 
