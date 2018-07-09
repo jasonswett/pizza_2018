@@ -60,7 +60,7 @@ $submitButton.onclick = function() {
   addTopping($toppingName.value);
 };
 
-$toppingName.onkeypress = function(e) {
+$toppingName.onkeydown = function(e) {
   setErrorMessage('');
 
   if (e.key === 'Enter') {
