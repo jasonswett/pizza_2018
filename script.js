@@ -6,6 +6,9 @@ var toppings = [
   'Green Pepper'
 ];
 
+var $submitButton = document.getElementById('submit');
+var $toppingName = document.getElementById('topping-name');
+
 function refreshToppingList() {
   let $content = document.getElementById('content');
   $content.innerHTML = '';
@@ -18,12 +21,14 @@ function refreshToppingList() {
 }
 
 function addTopping(toppingName) {
+  if (toppingName === '') {
+    return;
+  }
+
   toppings.push(toppingName);
   refreshToppingList();
+  $toppingName.value = '';
 }
-
-var $submitButton = document.getElementById('submit');
-var $toppingName = document.getElementById('topping-name');
 
 $submitButton.onclick = function() {
   addTopping($toppingName.value);
