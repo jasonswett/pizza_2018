@@ -176,7 +176,7 @@ function addTopping(name, price) {
     return;
   }
 
-  toppings.push({ name: name, price: price * 100 });
+  toppings.push(new Topping(name, price * 100));
   refreshToppingList();
   $('topping-name').value = '';
   $('topping-price').value = '';
