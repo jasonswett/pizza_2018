@@ -9,6 +9,13 @@ class Topping {
   }
 }
 
+class Pizza {
+  static addTopping(topping) {
+    pizza.toppings.push(topping);
+    refreshPizzaSummary(pizza.toppings);
+  }
+}
+
 var toppings = [
   new Topping(
     'Pepperoni',
@@ -76,11 +83,6 @@ function refreshPizzaSummary(toppings) {
   $('pizza-summary').appendChild($totalDiv);
 }
 
-function addToppingToPizza(topping) {
-  pizza.toppings.push(topping);
-  refreshPizzaSummary(pizza.toppings)
-}
-
 function refreshPizzaList() {
   $('pizza-list').innerHTML = '';
 
@@ -105,7 +107,7 @@ function addPizzaToppingOptionRow($pizzaToppingOptions, topping) {
   $button.innerHTML = topping.name;
 
   $button.onclick = function() {
-    addToppingToPizza(topping);
+    Pizza.addTopping(topping);
   }
 
   $li.appendChild($button);
