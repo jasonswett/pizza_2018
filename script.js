@@ -10,6 +10,18 @@ class Topping {
 }
 
 class Pizza {
+  constructor() {
+    this.toppings = [];
+  }
+
+  static cost(toppings) {
+    let total = 1500;
+    toppings.forEach(function(topping) {
+      total += topping.price;
+    });
+    return total;
+  }
+
   static addTopping(topping) {
     pizza.toppings.push(topping);
     refreshPizzaSummary(pizza.toppings);
@@ -41,9 +53,7 @@ var toppings = [
 
 var $ = (id) => document.getElementById(id);
 
-var pizza = {
-  toppings: []
-};
+var pizza = new Pizza();
 
 var pizzas = [];
 
@@ -55,16 +65,6 @@ function addToppingRow($toppingList, topping) {
   let $li = document.createElement('li');
   $li.innerHTML = topping;
   $toppingList.appendChild($li);
-}
-
-function pizzaCost(toppings) {
-  let total = 1500;
-
-  toppings.forEach(function(topping) {
-    total += topping.price;
-  });
-
-  return total;
 }
 
 function inlineToppingList(toppings) {
@@ -79,7 +79,7 @@ function refreshPizzaSummary(toppings) {
   $('pizza-summary').appendChild($div);
 
   let $totalDiv = document.createElement('div');
-  $totalDiv.innerHTML = `Total: ${formattedPrice(pizzaCost(toppings))}`;
+  $totalDiv.innerHTML = `Total: ${formattedPrice(Pizza.cost(toppings))}`;
   $('pizza-summary').appendChild($totalDiv);
 }
 
@@ -88,7 +88,7 @@ function refreshPizzaList() {
 
   pizzas.forEach(function(pizza) {
     let $div = document.createElement('div');
-    $div.innerHTML = `${inlineToppingList(pizza.toppings)} (${formattedPrice(pizzaCost(pizza.toppings))})`;
+    $div.innerHTML = `${inlineToppingList(pizza.toppings)} (${formattedPrice(Pizza.cost(pizza.toppings))})`;
     $('pizza-list').appendChild($div);
   });
 }
