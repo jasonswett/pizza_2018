@@ -14,48 +14,42 @@ class Pizza {
     this.toppings = [];
   }
 
-  static cost(toppings) {
+  cost() {
     let total = 1500;
-    toppings.forEach(function(topping) {
+    this.toppings.forEach(function(topping) {
       total += topping.price;
     });
     return total;
   }
 
-  static addTopping(topping) {
-    pizza.toppings.push(topping);
-    refreshPizzaSummary(pizza);
+  addTopping(topping) {
+    this.toppings.push(topping);
+    refreshPizzaSummary(this);
+  }
+
+  toString() {
+    return `${inlineToppingList(this.toppings)} (${formattedPrice(this.cost())})`;
   }
 }
 
-var toppings = [
-  new Topping(
-    'Pepperoni',
-    100,
-  ),
-  new Topping(
-    'Ham',
-    100,
-  ),
-  new Topping(
-    'Sausage',
-    100,
-  ),
-  new Topping(
-    'Onion',
-    50,
-  ),
-  new Topping(
-    'Green Pepper',
-    50,
-  )
-];
+class RestaurantToppingsList {
+  constructor() {
+    this.toppings = [
+      new Topping('Pepperoni', 100),
+      new Topping('Sausage', 100),
+      new Topping('Onion', 50),
+      new Topping('Green Pepper', 50)
+    ];
+  }
+}
 
 var $ = (id) => document.getElementById(id);
 
 var pizza = new Pizza();
 
 var pizzas = [];
+
+var restaurantToppingsList = new RestaurantToppingsList();
 
 function formattedPrice(price) {
   return `$${(price / 100).toFixed(2)}`;
@@ -75,11 +69,11 @@ function refreshPizzaSummary(pizza) {
   $('pizza-summary').innerHTML = '';
 
   let $div = document.createElement('div');
-  $div.innerHTML = inlineToppingList(toppings);
+  $div.innerHTML = inlineToppingList(pizza.toppings);
   $('pizza-summary').appendChild($div);
 
   let $totalDiv = document.createElement('div');
-  $totalDiv.innerHTML = `Total: ${formattedPrice(pizza.cost(toppings))}`;
+  $totalDiv.innerHTML = `Total: ${formattedPrice(pizza.cost())}`;
   $('pizza-summary').appendChild($totalDiv);
 }
 
@@ -88,7 +82,7 @@ function refreshPizzaList() {
 
   pizzas.forEach(function(pizza) {
     let $div = document.createElement('div');
-    $div.innerHTML = `${inlineToppingList(pizza.toppings)} (${formattedPrice(pizza.cost())})`;
+    $div.innerHTML = pizza;
     $('pizza-list').appendChild($div);
   });
 }
@@ -107,7 +101,7 @@ function addPizzaToppingOptionRow($pizzaToppingOptions, topping) {
   $button.innerHTML = topping.name;
 
   $button.onclick = function() {
-    Pizza.addTopping(topping);
+    pizza.addTopping(topping);
   }
 
   $li.appendChild($button);
@@ -120,7 +114,7 @@ function refreshToppingList() {
   $toppingList.innerHTML = '';
   $pizzaToppingOptions.innerHTML = '';
 
-  toppings.forEach(function(topping) {
+  restaurantToppingsList.toppings.forEach(function(topping) {
     addToppingRow($toppingList, topping)
     addPizzaToppingOptionRow($pizzaToppingOptions, topping)
   });
@@ -129,7 +123,7 @@ function refreshToppingList() {
 function toppingNameIsDuplicate(newToppingName) {
   let result = false;
 
-  toppings.forEach(function(topping) {
+  restaurantToppingsList.toppings.forEach(function(topping) {
     if (topping.name === newToppingName) {
       result = true;
     }
@@ -178,7 +172,7 @@ function addTopping(name, price) {
     return;
   }
 
-  toppings.push(new Topping(name, price * 100));
+  restaurantToppingsList.toppings.push(new Topping(name, price * 100));
   refreshToppingList();
   $('topping-name').value = '';
   $('topping-price').value = '';
