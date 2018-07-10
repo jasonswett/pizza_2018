@@ -73,11 +73,7 @@ function refreshPizzaSummary(toppings) {
 }
 
 function addToppingToPizza(topping) {
-  pizza.toppings.push({
-    name: topping.name,
-    price: topping.price
-  });
-
+  pizza.toppings.push(topping);
   refreshPizzaSummary(pizza.toppings)
 }
 
