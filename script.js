@@ -3,6 +3,10 @@ class Topping {
     this.name = name;
     this.price = price;
   }
+
+  toString() {
+    return `${this.name} (${formattedPrice(this.price)})`;
+  }
 }
 
 var toppings = [
@@ -42,7 +46,7 @@ function formattedPrice(price) {
 
 function addToppingRow($toppingList, topping) {
   let $li = document.createElement('li');
-  $li.innerHTML = `${topping.name} (${formattedPrice(topping.price)})`;
+  $li.innerHTML = topping;
   $toppingList.appendChild($li);
 }
 
