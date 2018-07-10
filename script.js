@@ -1,24 +1,31 @@
-var toppings = [
-  {
-    name: 'Pepperoni',
-    price: 100,
-  },
-  {
-    name: 'Ham',
-    price: 100,
-  },
-  {
-    name: 'Sausage',
-    price: 100,
-  },
-  {
-    name: 'Onion',
-    price: 50,
-  },
-  {
-    name: 'Green Pepper',
-    price: 50,
+class Topping {
+  constructor(name, price) {
+    this.name = name;
+    this.price = price;
   }
+}
+
+var toppings = [
+  new Topping(
+    'Pepperoni',
+    100,
+  ),
+  new Topping(
+    'Ham',
+    100,
+  ),
+  new Topping(
+    'Sausage',
+    100,
+  ),
+  new Topping(
+    'Onion',
+    50,
+  ),
+  new Topping(
+    'Green Pepper',
+    50,
+  )
 ];
 
 var $ = (id) => document.getElementById(id);
